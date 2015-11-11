@@ -1,0 +1,51 @@
+﻿@using Microsoft.Azure.ActiveDirectory.GraphClient
+@using AADGraphAPI.Models
+@model List<AADGraphAPI.Models.File>
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>My Files<span class="refreshlink"> &nbsp;@Html.ActionLink("Refresh", "Index")</span></h2>
+<table id="directoryObjects" class="table table-bordered table-striped">
+    <tr>
+        <th>
+            File Name
+        </th>
+        <th>
+            File Type
+        </th>
+        <th>
+            Created By
+        </th>
+        <th>
+            Last Modified
+        </th><th>
+File Size</th>
+    </tr>
+    @foreach (var file in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => file.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => file.FileType)
+            </td><td>
+    @Html.DisplayFor(modelItem => file.CreatedBy)
+</td><td>
+    @Html.DisplayFor(modelItem => file.LastModified)
+</td><td>
+    @Html.DisplayFor(modelItem => file.Size)
+</td>
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@if (ViewBag.ErrorMessage == "AuthorizationRequired")
+{
+    <p>You have to sign-in. Click @Html.ActionLink("here", "GetGroups", "Groups", new { reauth = true }, null) to sign-in.</p>
+}

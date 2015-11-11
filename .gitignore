@@ -1,0 +1,5 @@
+.vs/config/applicationhost.config
+packages/
+AADGraphAPI/bin/
+AADGraphAPI/obj/
+AADGraphAPI/App_Data/
